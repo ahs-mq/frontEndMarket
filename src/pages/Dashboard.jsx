@@ -21,6 +21,27 @@ export default function Dashboard() {
     function sendProject(e) {
         e.preventDefault()
         const formData = new FormData(e.target)
+
+        // Handle multiple files
+        const files = e.target.file.files
+        for (let i = 0; i < files.length; i++) {
+            formData.append('files', files[i])
+        }
+
+        axios.post('/api/projects', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => {
+                console.log('Project created:', res.data)
+                // Optionally, reset the form or update state
+                e.target.reset()
+            })
+            .catch(err => {
+                console.error('Error creating project:', err)
+            })
     }
     return (
         <div>
@@ -33,11 +54,11 @@ export default function Dashboard() {
                     <input type="text" name="text" placeholder="Muscat" required />
                     <label htmlFor="description">Description</label>
                     <textarea name="description" placeholder="Describe your project" required />
-                    <label htmlFor="file">Upload Files</label>
+                    <label htmlFor="images">Upload Files</label>
                     <input type="file" multiple accept="image/*" name="file" />
                     <label htmlFor="tags">Tags</label>
                     <input type="text" name="tags" placeholder="Tags seperated by comma" />
-                    <input type="submit" value="submit"></input>
+                    <input type="submit" value="submit" />
                 </form>
             </div>
             <div>
