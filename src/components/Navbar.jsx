@@ -32,7 +32,7 @@ export default function Navbar() {
         <nav>
             <Link to="/">Home</Link>
             {isAuth ?
-                <><Link to="/new-project">New Project</Link>
+                <>
                     <Link to="/dashboard">Dashboard</Link>
                     <a href='/api/logout' onClick={HandleLogOut}>Logout</a>
                 </> :

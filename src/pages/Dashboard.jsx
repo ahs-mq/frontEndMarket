@@ -20,17 +20,22 @@ export default function Dashboard() {
 
     function sendProject(e) {
         e.preventDefault()
-        const formData = new FormData(e.target)
+        const formData = new FormData()
+
+        // Append other fields
+        formData.append('title', e.target.title.value)
+        formData.append('address', e.target.address.value)
+        formData.append('description', e.target.description.value)
+        formData.append('tags', e.target.tags.value)
 
         // Handle multiple files
-        const files = e.target.file.files
+        const files = e.target['images[]'].files
         for (let i = 0; i < files.length; i++) {
-            formData.append('files', files[i])
+            formData.append('images[]', files[i])
         }
 
         axios.post('/api/projects', formData, {
             headers: {
-                'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
@@ -51,11 +56,11 @@ export default function Dashboard() {
                     <label htmlFor="title">title</label>
                     <input type="text" name="title" placeholder="Project Name" required />
                     <label htmlFor="address">Address</label>
-                    <input type="text" name="text" placeholder="Muscat" required />
+                    <input type="text" name="address" placeholder="Muscat" required />
                     <label htmlFor="description">Description</label>
                     <textarea name="description" placeholder="Describe your project" required />
                     <label htmlFor="images">Upload Files</label>
-                    <input type="file" multiple accept="image/*" name="file" />
+                    <input type="file" multiple accept="image/*" name="images[]" />
                     <label htmlFor="tags">Tags</label>
                     <input type="text" name="tags" placeholder="Tags seperated by comma" />
                     <input type="submit" value="submit" />
