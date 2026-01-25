@@ -40,7 +40,7 @@ export default function Login() {
                 <input type="email" name="email" placeholder="example@example.com" required />
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" required />
-                <input type="submit" value="submit"></input>
+                <button type="submit" value="submit"></button>
             </form>
             {err && <p>{err}</p>}
         </div>
