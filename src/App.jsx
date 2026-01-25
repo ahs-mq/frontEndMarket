@@ -36,14 +36,14 @@ function App() {
 
 
   return (
-    <>
+    <div className="flex flex-col m-0 bg-gray-900 text-white">
       <AppContext value={{ user, isAuth, setIsAuth, setUser }}>
         <BrowserRouter>
           <Navbar />
           <AppRoutes />
         </BrowserRouter>
       </AppContext>
-    </>
+    </div>
   )
 }
 

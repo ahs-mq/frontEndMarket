@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import axios from 'axios'
 import { useContext } from 'react'
 import { AppContext } from '../providers/AppProvider'
+import '../App.css'
 
 export default function Navbar() {
     const navigate = useNavigate()
@@ -29,7 +30,7 @@ export default function Navbar() {
     }
 
     return (
-        <nav>
+        <nav className='flex space-between align-center'>
             <Link to="/">Home</Link>
             {isAuth ?
                 <>
