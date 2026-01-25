@@ -22,6 +22,7 @@ export default function Login() {
         try {
             console.log("Response:", res.status, res.data);
             const { user, token } = res.data
+            console.log(res.data)
             setIsAuth(true)
             localStorage.setItem("token", token)
             setUser(user)
@@ -40,7 +41,7 @@ export default function Login() {
                 <input type="email" name="email" placeholder="example@example.com" required />
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" required />
-                <button type="submit" value="submit"></button>
+                <input type="submit" value="submit" />
             </form>
             {err && <p>{err}</p>}
         </div>

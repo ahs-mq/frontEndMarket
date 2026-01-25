@@ -43,7 +43,7 @@ export default function Signup() {
                 <input type="password" name="password" required />
                 <label htmlFor="password_confirmation">Confirm Password</label>
                 <input type="password" name="password_confirmation" required />
-                <button type="submit" value="submit"></button>
+                <input type="submit" value="submit" />
             </form>
             {err && <p>{err}</p>}
         </div>
