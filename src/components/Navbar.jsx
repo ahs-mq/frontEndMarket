@@ -28,21 +28,30 @@ export default function Navbar() {
         }
 
     }
-
     return (
-        <nav>
-            <div>
-                <Link to="/">Home</Link>
-                {isAuth ?
-                    <div>
-                        <Link to="/dashboard">Dashboard</Link>
-                        <a href='/api/logout' onClick={HandleLogOut}>Logout</a>
-                    </div> :
-                    <div>
-                        <Link to="/login">Login</Link>
-                        <Link to="/signup">Register</Link>
+        <nav className="bg-gray-800 w-full p-4">
+            <div className="flex justify-between items-center text-center max-w-6xl mx-auto">
+                {/* Left side */}
+                <Link to="/" className="text-white">Home</Link>
+
+                {/* Right side */}
+                {isAuth ? (
+                    <div className="flex space-x-4">
+                        <Link to="/dashboard" className="text-gray-300 hover:text-white">Dashboard</Link>
+                        <a
+                            href="/api/logout"
+                            onClick={HandleLogOut}
+                            className="text-gray-300 hover:text-white"
+                        >
+                            Logout
+                        </a>
                     </div>
-                }
+                ) : (
+                    <div className="flex space-x-4">
+                        <Link to="/login" className="text-gray-300 hover:text-white">Login</Link>
+                        <Link to="/signup" className="text-gray-300 hover:text-white">Register</Link>
+                    </div>
+                )}
             </div>
         </nav>
     )

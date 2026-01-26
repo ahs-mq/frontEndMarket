@@ -34,18 +34,47 @@ export default function Login() {
         }
     }
     return (
-        <div className="min-h-screen">
-            <h1 className="mt-4 text-center text-4xl mb-10">Login</h1>
-            <div className="flex mt-20 justify-start pl-10 flex-grow ">
-                <form method="POST" onSubmit={loginUser} className="flex flex-col gap-5 w-70 h-1 ">
-                    <label htmlFor="email" className="border-1">Email</label>
-                    <input type="email" className="py-1" name="email" placeholder="example@example.com" required />
-                    <label htmlFor="password" className="border-1">Password</label>
-                    <input type="password" name="password" className="py-1" required />
-                    <input type="submit" value="submit" className="bg-white font-bold text-black" />
+        <div className="min-h-screen bg-gray-900 flex items-center justify-center p-6">
+            <div className="bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md">
+                <h1 className="text-4xl font-bold text-white text-center mb-8">Login</h1>
+
+                <form method="POST" onSubmit={loginUser} className="flex flex-col gap-5">
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="example@example.com"
+                            required
+                            className="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-amber-400 focus:ring-amber-400"
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            name="password"
+                            required
+                            className="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-amber-400 focus:ring-amber-400"
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="w-full bg-white text-black font-bold py-2 px-4 rounded-md hover:bg-amber-500 transition"
+                    >
+                        Submit
+                    </button>
                 </form>
-                {err && <p>{err}</p>}
+
+                {err && <p className="mt-4 text-red-400 text-sm">{err}</p>}
             </div>
         </div>
-    )
+    );
+
 }
