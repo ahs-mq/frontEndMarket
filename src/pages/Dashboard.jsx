@@ -53,8 +53,8 @@ export default function Dashboard() {
             })
     }
     return (
-        <div>
-            <div>
+        <div className="min-h-screen">
+            <div className="flex flex-col">
                 <h2>Create New Project</h2>
                 <form method="post" encType="multipart/form-data" onSubmit={sendProject}>
                     <label htmlFor="title">title</label>

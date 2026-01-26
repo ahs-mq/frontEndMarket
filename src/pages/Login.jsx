@@ -34,16 +34,18 @@ export default function Login() {
         }
     }
     return (
-        <div>
-            <h1>Login page</h1>
-            <form method="POST" onSubmit={loginUser}>
-                <label htmlFor="email">Email</label>
-                <input type="email" name="email" placeholder="example@example.com" required />
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" required />
-                <input type="submit" value="submit" />
-            </form>
-            {err && <p>{err}</p>}
+        <div className="min-h-screen">
+            <h1 className="mt-4 text-center text-4xl mb-10">Login</h1>
+            <div className="flex mt-20 justify-start pl-10 flex-grow ">
+                <form method="POST" onSubmit={loginUser} className="flex flex-col gap-5 w-70 h-1 ">
+                    <label htmlFor="email" className="border-1">Email</label>
+                    <input type="email" className="py-1" name="email" placeholder="example@example.com" required />
+                    <label htmlFor="password" className="border-1">Password</label>
+                    <input type="password" name="password" className="py-1" required />
+                    <input type="submit" value="submit" className="bg-white font-bold text-black" />
+                </form>
+                {err && <p>{err}</p>}
+            </div>
         </div>
     )
 }

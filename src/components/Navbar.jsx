@@ -30,19 +30,20 @@ export default function Navbar() {
     }
 
     return (
-        <nav className='flex space-between align-center'>
-            <Link to="/">Home</Link>
-            {isAuth ?
-                <>
-                    <Link to="/dashboard">Dashboard</Link>
-                    <a href='/api/logout' onClick={HandleLogOut}>Logout</a>
-                </> :
-                <>
-                    <Link to="/login">Login</Link>
-                    <Link to="/signup">Register</Link>
-                </>
-            }
-
+        <nav>
+            <div>
+                <Link to="/">Home</Link>
+                {isAuth ?
+                    <div>
+                        <Link to="/dashboard">Dashboard</Link>
+                        <a href='/api/logout' onClick={HandleLogOut}>Logout</a>
+                    </div> :
+                    <div>
+                        <Link to="/login">Login</Link>
+                        <Link to="/signup">Register</Link>
+                    </div>
+                }
+            </div>
         </nav>
     )
 }
