@@ -4,6 +4,7 @@ import AppRoutes from './components/AppRoutes.jsx'
 import Navbar from './components/Navbar.jsx'
 import { AppContext } from './providers/AppProvider.jsx'
 import { useEffect, useState } from 'react'
+import { configureEcho } from '@laravel/echo-react';
 import axios from 'axios'
 
 
@@ -33,6 +34,15 @@ function App() {
       })
   }, [isAuth])
 
+  configureEcho({
+    broadcaster: 'reverb',
+    key: import.meta.env.VITE_REVERB_APP_KEY,
+    wsHost: import.meta.env.VITE_REVERB_HOST,
+    wsPort: import.meta.env.VITE_REVERB_PORT,
+    wssPort: import.meta.env.VITE_REVERB_PORT,
+    forceTLS: false,
+    enabledTransports: ['ws', 'wss'],
+  });
 
 
   return (

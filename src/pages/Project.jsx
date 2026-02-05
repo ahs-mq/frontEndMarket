@@ -1,19 +1,22 @@
 import axios from "axios"
-import { useParams, useNavigate } from "react-router"
+import { useParams } from "react-router"
 import { useState, useEffect, useContext } from "react"
 import { AppContext } from "../providers/AppProvider"
+import { useEchoPublic } from "@laravel/echo-react"
 
 export default function Project() {
     const { id } = useParams()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const [project, setProject] = useState(null)
     const { user } = useContext(AppContext)
     const [loading, setLoading] = useState(true)
+    const [liveStatus, setLiveStatus] = useState('Waiting for status...')
 
     useEffect(() => {
         axios.get(`/api/projects/${id}`)
             .then(res => {
                 setProject(res.data.project)
+                setLiveStatus(res.data.project.status);
                 console.log(res.data.project)
                 setLoading(false)
             })
@@ -43,7 +46,6 @@ export default function Project() {
         })
             .then(res => {
                 console.log('Edited:', res.data)
-                navigate(0)
                 e.target.reset()
             })
             .catch(err => {
@@ -80,11 +82,19 @@ export default function Project() {
         })
             .then(res => {
                 console.log(res)
-                navigate(0)
 
             })
             .catch(err => console.log(err))
     }
+
+    useEchoPublic('projects', '.App\\Events\\StatusUpdated', (event) => {
+        console.log("Hook caught event:", event);
+
+        if (Number(event.id) === Number(id)) {
+            console.log("Setting status to:", event.status);
+            setLiveStatus(event.status);
+        }
+    }).listen();
 
     return (
         <div className="min-h-screen bg-gray-900 p-6">
@@ -103,7 +113,7 @@ export default function Project() {
                         <>
                             <h2 className="text-xl font-semibold text-white mb-2">{project.title}</h2>
                             <p className="text-gray-300 mb-1">{project.description}</p>
-                            <p className="text-sm text-gray-400">Status: {project.status}</p>
+                            <p className="text-sm text-gray-400">Status: {liveStatus} </p>
                         </>
                     )}
                 </div>
